@@ -1,15 +1,18 @@
 package com.example.user.brad26;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
     private GridView gridView;
@@ -99,7 +102,20 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public View getView(int i, View view, ViewGroup viewGroup) {
-            return null;
+            if (view == null){
+                view = LayoutInflater.from(context).inflate(R.layout.layout_item,null);
+            }
+            ImageView img = (ImageView)view.findViewById(R.id.item_img);
+            TextView title = (TextView)view.findViewById(R.id.item_title);
+
+            img.setImageResource(balls[i]);
+            title.setText("Ball " +i);
+            if (i%2==0){
+                view.setBackgroundColor(Color.YELLOW);
+            }
+
+
+            return view;
         }
     }
 
