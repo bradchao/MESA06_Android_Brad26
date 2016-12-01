@@ -3,10 +3,13 @@ package com.example.user.brad26;
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
+import android.widget.ImageView;
 
 public class MainActivity extends AppCompatActivity {
     private GridView gridView;
@@ -30,6 +33,12 @@ public class MainActivity extends AppCompatActivity {
     private void initGridView(){
         myAdapter = new MyAdapter(this);
         gridView.setAdapter(myAdapter);
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Log.v("brad", "i = " +i);
+            }
+        });
     }
 
     private class MyAdapter extends BaseAdapter {
@@ -53,7 +62,16 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public View getView(int i, View view, ViewGroup viewGroup) {
-            return null;
+            ImageView img;
+            if (view == null){
+                img = new ImageView(context);
+                img.setLayoutParams(new GridView.LayoutParams(185, 185));
+                img.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+            }else{
+                img = (ImageView)view;
+            }
+            img.setImageResource(balls[i]);
+            return img;
         }
     }
 
