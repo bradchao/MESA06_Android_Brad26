@@ -1,5 +1,6 @@
 package com.example.user.brad26;
 
+import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -10,6 +11,10 @@ import android.widget.GridView;
 public class MainActivity extends AppCompatActivity {
     private GridView gridView;
     private MyAdapter myAdapter;
+    private int[] balls = {R.drawable.ball1,R.drawable.ball2,
+    R.drawable.ball3,R.drawable.ball4,R.drawable.ball5,
+    R.drawable.ball6,R.drawable.ball7,R.drawable.ball8,
+    R.drawable.ball9,R.drawable.ball10};
 
 
     @Override
@@ -23,15 +28,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initGridView(){
-        myAdapter = new MyAdapter();
+        myAdapter = new MyAdapter(this);
         gridView.setAdapter(myAdapter);
     }
 
     private class MyAdapter extends BaseAdapter {
+        private Context context;
+        MyAdapter(Context context){this.context = context;}
 
         @Override
         public int getCount() {
-            return 0;
+            return balls.length;
         }
 
         @Override
